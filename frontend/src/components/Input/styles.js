@@ -10,6 +10,8 @@ export const Container = styled.div`
 
   width: 100%;
 
+
+
   label{
     font-size: 11px;
     color: #00DCB7;
@@ -24,7 +26,6 @@ export const Container = styled.div`
     margin: 2px 0 4px 0;
 
     border: none;
-    outline: none;
     padding: 0 0 0 2px;
 
 
