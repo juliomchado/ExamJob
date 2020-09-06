@@ -1,14 +1,17 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
 
 const Button = ({
-  children, icon, text, color, ...rest
-}) => (
-  <Container {...rest} style={color && { borderColor: color, color }}>
-    {children}
-  </Container>
-);
+  children, icon, text, color, addButton, ...rest
+}) => {
+  const addButtonStyles = addButton && 151;
+
+  return (
+    <Container {...rest} style={color && { borderColor: color, color, width: addButtonStyles }}>
+      {children}
+    </Container>
+  );
+};
 
 export default Button;

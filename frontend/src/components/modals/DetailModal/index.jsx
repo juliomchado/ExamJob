@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { FiEdit2, FiDelete, FiX } from 'react-icons/fi';
 
 import Modal from 'react-modal';
+import Button from '../../components/Button';
 
 import Content from '../../assets/Conteudo1.png';
-
-import Button from '../../components/Button';
 
 import { Container, ContentContainer } from './styles';
 

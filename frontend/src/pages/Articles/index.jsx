@@ -28,7 +28,6 @@ const Articles = () => {
   }, [isOpenDetailModal]);
 
   const openSureModal = useCallback(() => {
-    console.log('oi');
     setIsOpenSureModal(!isOpenSureModal);
   }, [isOpenSureModal]);
 
@@ -52,7 +51,7 @@ const Articles = () => {
       <Main>
         <div>
           <h1>ARTIGOS</h1>
-          <Button color="#00145F">
+          <Button color="#00145F" addButton>
             <FiPlusCircle style={{ width: 14, height: 14 }} />
             <span>ADICIONAR</span>
           </Button>

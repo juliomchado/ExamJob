@@ -52,10 +52,10 @@ const SureModal = ({ isOpen, setIsOpen }) => {
         <ContentContainer>
           <h3>Tem certeza de que deseja excluir?</h3>
           <div>
-            <Button type="button" onClick={setIsOpen}>
+            <Button type="button" onClick={openSucessModal}>
               <span>SIM</span>
             </Button>
-            <Button type="button" color="#DC0000" onClick={openSucessModal}>
+            <Button type="button" color="#DC0000" onClick={setIsOpen}>
               <span>NÃO</span>
             </Button>
           </div>
