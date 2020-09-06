@@ -47,7 +47,7 @@ function DetailModal({ isOpen, setIsOpen }) {
     >
       <Container>
         <ContentContainer>
-          <img src={Content} alt="Content Image" />
+          <img src={Content} alt="Content" />
           <div>
             <h3>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy</h3>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
@@ -67,6 +67,7 @@ function DetailModal({ isOpen, setIsOpen }) {
               top: '-25px',
               width: '14px',
               height: '14px',
+              cursor: 'pointer',
             }}
             onClick={setIsOpen}
           />

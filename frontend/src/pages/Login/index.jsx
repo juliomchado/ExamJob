@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Input from '../../components/Input';
-import ButtonComponent from '../../components/Button';
+import Button from '../../components/Button';
 
 import { Container, Form } from './styles';
 
@@ -23,7 +23,7 @@ const Login = () => {
         <img src={Logo} alt="Lead Up" />
         <Input type="text" label="E-mail" />
         <Input type="password" label="Senha" />
-        <ButtonComponent onClick={(e) => handleSubmitButton(e)}>Entrar</ButtonComponent>
+        <Button onClick={(e) => handleSubmitButton(e)}>Entrar</Button>
       </Form>
     </Container>
   );

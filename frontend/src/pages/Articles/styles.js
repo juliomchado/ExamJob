@@ -84,6 +84,7 @@ export const CardContent = styled.div`
     img {
       width: 244px;
       height: 244px;
+      cursor: pointer;
     }
 
     span{

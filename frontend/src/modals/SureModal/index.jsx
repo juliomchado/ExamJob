@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
-import { FiEdit2, FiDelete, FiX } from 'react-icons/fi';
 
 import Modal from 'react-modal';
-
-import Content from '../../assets/Conteudo1.png';
 
 import Button from '../../components/Button';
 
@@ -26,7 +23,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-function SureModal({ isOpen, setIsOpen }) {
+const SureModal = ({ isOpen, setIsOpen }) => {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
 
   useEffect(() => {
@@ -47,33 +44,19 @@ function SureModal({ isOpen, setIsOpen }) {
     >
       <Container>
         <ContentContainer>
-          <img src={Content} alt="Content Image" />
+          <h3>Tem certeza de que deseja excluir?</h3>
           <div>
-            <h3>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-
-            <Button>
-              <FiEdit2 />
-              <span>Editar</span>
+            <Button type="button" onClick={setIsOpen}>
+              <span>SIM</span>
             </Button>
-            <Button color="#DC0000">
-              <FiDelete />
-              <span>Excluir</span>
+            <Button type="button" color="#DC0000" onClick={setIsOpen}>
+              <span>NÃO</span>
             </Button>
           </div>
-          <FiX
-            style={{
-              position: 'relative',
-              top: '-25px',
-              width: '14px',
-              height: '14px',
-            }}
-            onClick={setIsOpen}
-          />
         </ContentContainer>
       </Container>
     </Modal>
   );
-}
+};
 
 export default SureModal;
