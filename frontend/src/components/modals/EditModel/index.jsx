@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useCallback } from 'react';
 import Modal from 'react-modal';
-import { FiX } from 'react-icons/fi';
+import DeleteSucessModal from '../MessageModal';
+
+import Button from '../../Button';
 
 import { Container, ContentContainer } from './styles';
 
@@ -24,6 +25,7 @@ Modal.setAppElement('#root');
 
 const SureModal = ({ isOpen, setIsOpen }) => {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
+  const [isSucessModal, setIsSucessModalModal] = React.useState(false);
 
   useEffect(() => {
     setModalStatus(isOpen);
@@ -32,6 +34,11 @@ const SureModal = ({ isOpen, setIsOpen }) => {
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
+
+  const openSucessModal = useCallback(() => {
+    setIsOpen();
+    setIsSucessModalModal(!isSucessModal);
+  }, [isSucessModal]);
 
   return (
     <Modal
@@ -43,11 +50,18 @@ const SureModal = ({ isOpen, setIsOpen }) => {
     >
       <Container>
         <ContentContainer>
-          <FiX onClick={setIsOpen} />
-          <h3>ARTIGO EXCLUIDO COM SUCESSO</h3>
+          <h3>Tem certeza de que deseja excluir?</h3>
+          <div>
+            <Button type="button" onClick={openSucessModal}>
+              <span>SIM</span>
+            </Button>
+            <Button type="button" color="#DC0000" onClick={setIsOpen}>
+              <span>NÃO</span>
+            </Button>
+          </div>
         </ContentContainer>
       </Container>
-
+      <DeleteSucessModal setIsOpen={openSucessModal} isOpen={isSucessModal} />
     </Modal>
   );
 };

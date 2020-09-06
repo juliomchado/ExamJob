@@ -1,10 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
 import Modal from 'react-modal';
+
+import { FiUpload } from 'react-icons/fi';
 import MessageModal from '../MessageModal';
 
 import Button from '../../Button';
+import Input from '../../Input';
+import TextArea from '../../TextArea';
 
-import { Container, ContentContainer } from './styles';
+import { Container, ContentContainer, CloseIcon } from './styles';
 
 const customStyles = {
   content: {
@@ -23,7 +27,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const SureModal = ({ isOpen, setIsOpen }) => {
+const EditArticleModal = ({ isOpen, setIsOpen }) => {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
   const [isSucessModal, setIsSucessModalModal] = React.useState(false);
 
@@ -50,20 +54,22 @@ const SureModal = ({ isOpen, setIsOpen }) => {
     >
       <Container>
         <ContentContainer>
-          <h3>Tem certeza de que deseja excluir?</h3>
-          <div>
-            <Button type="button" onClick={openSucessModal}>
-              <span>SIM</span>
-            </Button>
-            <Button type="button" color="#DC0000" onClick={setIsOpen}>
-              <span>NÃO</span>
-            </Button>
-          </div>
+          <CloseIcon onClick={setIsOpen} />
+          <h3>EDITAR</h3>
+          <Input label="Título" />
+          <TextArea />
+          <Button color="#00145F" width={114}>
+            <FiUpload />
+            <span>IMAGEM</span>
+          </Button>
+          <Button width={114} onClick={openSucessModal}>
+            <span>SALVAR</span>
+          </Button>
         </ContentContainer>
       </Container>
-      <MessageModal setIsOpen={openSucessModal} isOpen={isSucessModal} text="ARTIGO EXCLUIDO COM SUCESSO" />
+      <MessageModal setIsOpen={openSucessModal} isOpen={isSucessModal} text="ARTIGO ATUALIZADO" />
     </Modal>
   );
 };
 
-export default SureModal;
+export default EditArticleModal;

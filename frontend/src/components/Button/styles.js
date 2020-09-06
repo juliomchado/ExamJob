@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.button`
   width: 136px;
@@ -7,12 +8,12 @@ export const Container = styled.button`
   border: 1px solid #00DCB7;
   background-color: transparent;
 
-
-    color: #00DCB7;
+  color: #00DCB7;
 
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: color 0.3s;
 
   span{
     font-size: 14px;
@@ -25,6 +26,10 @@ export const Container = styled.button`
     width: 13px;
     height: 13px;
     margin-right: 10px;
+  }
+
+  &:hover{
+    opacity: 0.5;
   }
 
 `;

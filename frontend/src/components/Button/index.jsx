@@ -3,15 +3,11 @@ import React from 'react';
 import { Container } from './styles';
 
 const Button = ({
-  children, icon, text, color, addButton, ...rest
-}) => {
-  const addButtonStyles = addButton && 151;
-
-  return (
-    <Container {...rest} style={color && { borderColor: color, color, width: addButtonStyles }}>
-      {children}
-    </Container>
-  );
-};
+  children, icon, text, color, width, ...rest
+}) => (
+  <Container {...rest} style={color || width ? { borderColor: color, color, width } : {}}>
+    {children}
+  </Container>
+);
 
 export default Button;

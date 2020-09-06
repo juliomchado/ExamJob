@@ -5,9 +5,10 @@ import Modal from 'react-modal';
 import Button from '../../Button';
 
 import Content from '../../../assets/Conteudo1.png';
-import DeleteSucessModal from '../DeleteSucessModal';
+import MessageModal from '../MessageModal';
 
 import { Container, ContentContainer } from './styles';
+import EditArticleModal from '../EditArticleModal';
 
 const customStyles = {
   content: {
@@ -29,6 +30,7 @@ Modal.setAppElement('#root');
 function DetailModal({ isOpen, setIsOpen }) {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
   const [isSucessModal, setIsSucessModalModal] = React.useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = React.useState(false);
 
   useEffect(() => {
     setModalStatus(isOpen);
@@ -42,6 +44,10 @@ function DetailModal({ isOpen, setIsOpen }) {
     setIsOpen();
     setIsSucessModalModal(!isSucessModal);
   }, [isSucessModal]);
+
+  const openEditModal = useCallback(() => {
+    setIsOpenEditModal(!isOpenEditModal);
+  }, [isOpenEditModal]);
 
   return (
     <Modal
@@ -58,7 +64,7 @@ function DetailModal({ isOpen, setIsOpen }) {
             <h3>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy</h3>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
 
-            <Button>
+            <Button type="button" onClick={openEditModal}>
               <FiEdit2 />
               <span>Editar</span>
             </Button>
@@ -79,7 +85,8 @@ function DetailModal({ isOpen, setIsOpen }) {
           />
         </ContentContainer>
       </Container>
-      <DeleteSucessModal setIsOpen={openSucessModal} isOpen={isSucessModal} />
+      <MessageModal setIsOpen={openSucessModal} isOpen={isSucessModal} text="ARTIGO EXCLUIDO COM SUCESSO" />
+      <EditArticleModal setIsOpen={openEditModal} isOpen={isOpenEditModal} />
 
     </Modal>
   );
