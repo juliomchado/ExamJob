@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import {
   FiLogOut, FiPlusCircle, FiEdit2, FiDelete,
@@ -10,103 +10,121 @@ import Logo from '../../assets/Logo.svg';
 import Button from '../../components/Button';
 
 import Content from '../../assets/Conteudo1.png';
+import DetailModal from '../../modals/DetailModal';
+import SureModal from '../../modals/SureModal';
 
 import {
   Container, Main, CardContainer, Card, CardContent,
 } from './styles';
 
-const Articles = () => (
-  <Container>
-    <div>
-      <img src={Logo} alt="Lead Up" />
+const Articles = () => {
+  const [isOpenDetailModal, setIsOpenDetailModal] = useState(false);
+  const [isOpenSureModal, setIsOpenSureModal] = useState(false);
 
-      <Button>
-        <FiLogOut />
-        <span>
-          SAIR
-        </span>
-      </Button>
-    </div>
-    <Main>
+  const openDetailModal = useCallback(() => {
+    setIsOpenDetailModal(!isOpenDetailModal);
+  }, [isOpenDetailModal]);
+
+  const openSureModal = useCallback(() => {
+    setIsOpenSureModal(!isOpenSureModal);
+  }, [isOpenSureModal]);
+
+  return (
+
+    <Container>
       <div>
-        <h1>ARTIGOS</h1>
-        <Button color="#00145F">
-          <FiPlusCircle style={{ width: 14, height: 14 }} />
-          <span>ADICIONAR</span>
+        <img src={Logo} alt="Lead Up" />
+
+        <Button>
+          <FiLogOut />
+          <span>
+            SAIR
+          </span>
         </Button>
       </div>
-      <CardContainer>
-        <Card>
-          <CardContent>
-            <img src={Content} alt="Logo Conteudo" />
-            <span>Lorem ipsum dolor sit amet,</span>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-          </CardContent>
-          <div>
-            <Button>
-              <FiEdit2 />
-              <span>Editar</span>
-            </Button>
-            <Button color="#DC0000">
-              <FiEdit2 />
-              <span>Excluir</span>
-            </Button>
-          </div>
-        </Card>
-        <Card>
-          <CardContent>
-            <img src={Content} alt="Logo Conteudo" />
-            <span>Lorem ipsum dolor sit amet,</span>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-          </CardContent>
-          <div>
-            <Button>
-              <FiEdit2 />
-              <span>Editar</span>
-            </Button>
-            <Button color="#DC0000">
-              <FiEdit2 />
-              <span>Excluir</span>
-            </Button>
-          </div>
-        </Card>
-        <Card>
-          <CardContent>
-            <img src={Content} alt="Logo Conteudo" />
-            <span>Lorem ipsum dolor sit amet,</span>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-          </CardContent>
-          <div>
-            <Button>
-              <FiEdit2 />
-              <span>Editar</span>
-            </Button>
-            <Button color="#DC0000">
-              <FiEdit2 />
-              <span>Excluir</span>
-            </Button>
-          </div>
-        </Card>
-        <Card>
-          <CardContent>
-            <img src={Content} alt="Logo Conteudo" />
-            <span>Lorem ipsum dolor sit amet,</span>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-          </CardContent>
-          <div>
-            <Button>
-              <FiEdit2 />
-              <span>Editar</span>
-            </Button>
-            <Button color="#DC0000">
-              <FiEdit2 />
-              <span>Excluir</span>
-            </Button>
-          </div>
-        </Card>
-      </CardContainer>
-    </Main>
-  </Container>
-);
+      <Main>
+        <div>
+          <h1>ARTIGOS</h1>
+          <Button color="#00145F">
+            <FiPlusCircle style={{ width: 14, height: 14 }} />
+            <span>ADICIONAR</span>
+          </Button>
+        </div>
+        <CardContainer>
+          <Card>
+            <CardContent>
+              <img src={Content} alt="Content Photo" onClick={openDetailModal} />
+              <span>Lorem ipsum dolor sit amet,</span>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+            </CardContent>
+            <div>
+              <Button>
+                <FiEdit2 />
+                <span>Editar</span>
+              </Button>
+              <Button color="#DC0000" onClick={openSureModal}>
+                <FiDelete />
+                <span>Excluir</span>
+              </Button>
+            </div>
+          </Card>
+          <Card>
+            <CardContent>
+              <img src={Content} alt="Content Photo" onClick={openDetailModal} />
+              <span>Lorem ipsum dolor sit amet,</span>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+            </CardContent>
+            <div>
+              <Button>
+                <FiEdit2 />
+                <span>Editar</span>
+              </Button>
+              <Button color="#DC0000" onClick={openSureModal}>
+                <FiDelete />
+                <span>Excluir</span>
+              </Button>
+            </div>
+          </Card>
+          <Card>
+            <CardContent>
+              <img src={Content} alt="Content Photo" onClick={openDetailModal} />
+              <span>Lorem ipsum dolor sit amet,</span>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+            </CardContent>
+            <div>
+              <Button>
+                <FiEdit2 />
+                <span>Editar</span>
+              </Button>
+              <Button color="#DC0000" onClick={openSureModal}>
+                <FiDelete />
+                <span>Excluir</span>
+              </Button>
+            </div>
+          </Card>
+          <Card>
+            <CardContent>
+              <img src={Content} alt="Content Photo" onClick={openDetailModal} />
+              <span>Lorem ipsum dolor sit amet,</span>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+            </CardContent>
+            <div>
+              <Button>
+                <FiEdit2 />
+                <span>Editar</span>
+              </Button>
+              <Button color="#DC0000" onClick={openSureModal}>
+                <FiDelete />
+                <span>Excluir</span>
+              </Button>
+            </div>
+          </Card>
+        </CardContainer>
+      </Main>
+      <DetailModal setIsOpen={openDetailModal} isOpen={isOpenDetailModal} />
+      <SureModal setIsOpen={openSureModal} isOpen={isOpenSureModal} />
+    </Container>
+  );
+};
 
 export default Articles;

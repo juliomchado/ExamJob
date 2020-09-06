@@ -53,6 +53,7 @@ export const CardContainer = styled.div`
   height: auto;
 
   flex-wrap: wrap;
+
 `;
 
 export const Card = styled.div`

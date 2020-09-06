@@ -23,7 +23,7 @@ const Login = () => {
         <img src={Logo} alt="Lead Up" />
         <Input type="text" label="E-mail" />
         <Input type="password" label="Senha" />
-        <ButtonComponent onClick={handleSubmitButton}>Entrar</ButtonComponent>
+        <ButtonComponent onClick={(e) => handleSubmitButton(e)}>Entrar</ButtonComponent>
       </Form>
     </Container>
   );

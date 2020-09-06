@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
