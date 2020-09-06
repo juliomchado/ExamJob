@@ -5,7 +5,7 @@ import { Container } from './styles';
 const Input = ({ type, label }, ...rest) => (
   <Container>
     <label htmlFor="input">{label}</label>
-    <input type={{ type }} placeholder={label} {...rest} />
+    <input type={type} placeholder={label} {...rest} />
   </Container>
 );
 

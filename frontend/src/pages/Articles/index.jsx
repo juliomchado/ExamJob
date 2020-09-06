@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
@@ -18,8 +18,11 @@ import EditArticleModal from '../../components/modals/EditArticleModal';
 import {
   Container, Main, CardContainer, Card, CardContent,
 } from './styles';
+import api from '../../services/api';
 
 const Articles = () => {
+  const [content, setContent] = useState([]);
+
   const [isOpenDetailModal, setIsOpenDetailModal] = useState(false);
   const [isOpenSureModal, setIsOpenSureModal] = useState(false);
   const [isOpenAddModal, setIsOpenAddModal] = useState(false);
@@ -47,6 +50,12 @@ const Articles = () => {
     history.push('/login');
   }, []);
 
+  useEffect(() => {
+    api.get('articles').then((response) => {
+      setContent(response.data);
+    });
+  }, []);
+
   return (
 
     <Container>
@@ -69,74 +78,25 @@ const Articles = () => {
           </Button>
         </div>
         <CardContainer>
-          <Card>
-            <CardContent>
-              <img src={Content} alt="Content" onClick={openDetailModal} />
-              <span>Lorem ipsum dolor sit amet,</span>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-            </CardContent>
-            <div>
-              <Button type="button" onClick={openEditModal}>
-                <FiEdit2 />
-                <span>Editar</span>
-              </Button>
-              <Button type="button" color="#DC0000" onClick={openSureModal}>
-                <FiDelete />
-                <span>Excluir</span>
-              </Button>
-            </div>
-          </Card>
-          <Card>
-            <CardContent>
-              <img src={Content} alt="Content" onClick={openDetailModal} />
-              <span>Lorem ipsum dolor sit amet,</span>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-            </CardContent>
-            <div>
-              <Button onClick={openEditModal}>
-                <FiEdit2 />
-                <span>Editar</span>
-              </Button>
-              <Button color="#DC0000" onClick={openSureModal}>
-                <FiDelete />
-                <span>Excluir</span>
-              </Button>
-            </div>
-          </Card>
-          <Card>
-            <CardContent>
-              <img src={Content} alt="Content" onClick={openDetailModal} />
-              <span>Lorem ipsum dolor sit amet,</span>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-            </CardContent>
-            <div>
-              <Button type="button" onClick={openEditModal}>
-                <FiEdit2 />
-                <span>Editar</span>
-              </Button>
-              <Button color="#DC0000" onClick={openSureModal}>
-                <FiDelete />
-                <span>Excluir</span>
-              </Button>
-            </div>
-          </Card>
-          <Card>
-            <CardContent>
-              <img src={Content} alt="Content" onClick={openDetailModal} />
-              <span>Lorem ipsum dolor sit amet,</span>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-            </CardContent>
-            <div>
-              <Button type="button" onClick={openEditModal}>
-                <FiEdit2 />
-                <span>Editar</span>
-              </Button>
-              <Button color="#DC0000" onClick={openSureModal}>
-                <FiDelete />
-                <span>Excluir</span>
-              </Button>
-            </div>
-          </Card>
+          {content.map((data) => (
+            <Card key={data.id}>
+              <CardContent>
+                <img src={data.image} alt="Content" onClick={openDetailModal} />
+                <span>{data.title}</span>
+                <p>{data.description}</p>
+              </CardContent>
+              <div>
+                <Button type="button" onClick={openEditModal}>
+                  <FiEdit2 />
+                  <span>Editar</span>
+                </Button>
+                <Button type="button" color="#DC0000" onClick={openSureModal}>
+                  <FiDelete />
+                  <span>Excluir</span>
+                </Button>
+              </div>
+            </Card>
+          ))}
         </CardContainer>
       </Main>
       <DetailModal setIsOpen={openDetailModal} isOpen={isOpenDetailModal} />
