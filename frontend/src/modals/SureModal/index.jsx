@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useCallback } from 'react';
 import Modal from 'react-modal';
+import DeleteSucessModal from '../DeleteSucessModal';
 
 import Button from '../../components/Button';
 
@@ -25,6 +25,7 @@ Modal.setAppElement('#root');
 
 const SureModal = ({ isOpen, setIsOpen }) => {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
+  const [isSucessModal, setIsSucessModalModal] = React.useState(false);
 
   useEffect(() => {
     setModalStatus(isOpen);
@@ -33,6 +34,11 @@ const SureModal = ({ isOpen, setIsOpen }) => {
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
+
+  const openSucessModal = useCallback(() => {
+    setIsOpen();
+    setIsSucessModalModal(!isSucessModal);
+  }, [isSucessModal]);
 
   return (
     <Modal
@@ -49,12 +55,13 @@ const SureModal = ({ isOpen, setIsOpen }) => {
             <Button type="button" onClick={setIsOpen}>
               <span>SIM</span>
             </Button>
-            <Button type="button" color="#DC0000" onClick={setIsOpen}>
+            <Button type="button" color="#DC0000" onClick={openSucessModal}>
               <span>NÃO</span>
             </Button>
           </div>
         </ContentContainer>
       </Container>
+      <DeleteSucessModal setIsOpen={openSucessModal} isOpen={isSucessModal} />
     </Modal>
   );
 };
