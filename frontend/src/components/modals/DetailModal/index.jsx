@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { FiEdit2, FiDelete, FiX } from 'react-icons/fi';
 
 import Modal from 'react-modal';
-import Button from '../../components/Button';
+import Button from '../../Button';
 
-import Content from '../../assets/Conteudo1.png';
+import Content from '../../../assets/Conteudo1.png';
+import DeleteSucessModal from '../DeleteSucessModal';
 
 import { Container, ContentContainer } from './styles';
 
@@ -27,6 +28,7 @@ Modal.setAppElement('#root');
 
 function DetailModal({ isOpen, setIsOpen }) {
   const [modalStatus, setModalStatus] = React.useState(isOpen);
+  const [isSucessModal, setIsSucessModalModal] = React.useState(false);
 
   useEffect(() => {
     setModalStatus(isOpen);
@@ -35,6 +37,11 @@ function DetailModal({ isOpen, setIsOpen }) {
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
+
+  const openSucessModal = useCallback(() => {
+    setIsOpen();
+    setIsSucessModalModal(!isSucessModal);
+  }, [isSucessModal]);
 
   return (
     <Modal
@@ -55,7 +62,7 @@ function DetailModal({ isOpen, setIsOpen }) {
               <FiEdit2 />
               <span>Editar</span>
             </Button>
-            <Button color="#DC0000">
+            <Button color="#DC0000" onClick={openSucessModal}>
               <FiDelete />
               <span>Excluir</span>
             </Button>
@@ -72,6 +79,8 @@ function DetailModal({ isOpen, setIsOpen }) {
           />
         </ContentContainer>
       </Container>
+      <DeleteSucessModal setIsOpen={openSucessModal} isOpen={isSucessModal} />
+
     </Modal>
   );
 }

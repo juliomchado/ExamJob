@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import Modal from 'react-modal';
 import DeleteSucessModal from '../DeleteSucessModal';
 
-import Button from '../../components/Button';
+import Button from '../../Button';
 
 import { Container, ContentContainer } from './styles';
 

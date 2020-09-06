@@ -10,8 +10,8 @@ import Logo from '../../assets/Logo.svg';
 import Button from '../../components/Button';
 
 import Content from '../../assets/Conteudo1.png';
-import DetailModal from '../../modals/DetailModal';
-import SureModal from '../../modals/SureModal';
+import DetailModal from '../../components/modals/DetailModal';
+import SureModal from '../../components/modals/SureModal';
 
 import {
   Container, Main, CardContainer, Card, CardContent,
