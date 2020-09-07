@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import Modal from 'react-modal';
 import MessageModal from '../MessageModal';
 
@@ -24,8 +24,8 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const SureModal = ({ isOpen, setIsOpen }) => {
-  const [modalStatus, setModalStatus] = React.useState(isOpen);
-  const [isSucessModal, setIsSucessModalModal] = React.useState(false);
+  const [modalStatus, setModalStatus] = useState(isOpen);
+  const [isSucessModal, setIsSucessModalModal] = useState(false);
 
   useEffect(() => {
     setModalStatus(isOpen);
@@ -38,7 +38,7 @@ const SureModal = ({ isOpen, setIsOpen }) => {
   const openSucessModal = useCallback(() => {
     setIsOpen();
     setIsSucessModalModal(!isSucessModal);
-  }, [isSucessModal]);
+  }, [isSucessModal, setIsOpen]);
 
   return (
     <Modal

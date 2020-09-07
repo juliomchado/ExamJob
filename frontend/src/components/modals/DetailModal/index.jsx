@@ -9,6 +9,7 @@ import MessageModal from '../MessageModal';
 
 import { Container, ContentContainer } from './styles';
 import EditArticleModal from '../EditArticleModal';
+import { useSelector } from 'react-redux';
 
 const customStyles = {
   content: {
@@ -43,13 +44,17 @@ function DetailModal({ isOpen, setIsOpen }) {
   const openSucessModal = useCallback(() => {
     setIsOpen();
     setIsSucessModalModal(!isSucessModal);
-  }, [isSucessModal]);
+  }, [isSucessModal, setIsOpen]);
 
   const openEditModal = useCallback(() => {
     setIsOpenEditModal(!isOpenEditModal);
   }, [isOpenEditModal]);
 
+  const state = useSelector(state => state.content)
+
+  console.log(state)
   return (
+
     <Modal
       isOpen={modalStatus}
       onAfterOpen={afterOpenModal}

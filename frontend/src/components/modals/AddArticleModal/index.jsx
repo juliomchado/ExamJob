@@ -42,7 +42,7 @@ const AddArticleModal = ({ isOpen, setIsOpen }) => {
   const openSucessModal = useCallback(() => {
     setIsOpen();
     setIsSucessModalModal(!isSucessModal);
-  }, [isSucessModal]);
+  }, [isSucessModal, setIsOpen]);
 
   return (
     <Modal
@@ -56,7 +56,7 @@ const AddArticleModal = ({ isOpen, setIsOpen }) => {
         <ContentContainer>
           <CloseIcon onClick={setIsOpen} />
           <h3>CRIAR</h3>
-          <Input label="Título" />
+          <Input name="text" label="Título" />
           <TextArea />
           <Button color="#00145F" width={114}>
             <FiUpload />
@@ -66,6 +66,7 @@ const AddArticleModal = ({ isOpen, setIsOpen }) => {
             <span>SALVAR</span>
           </Button>
         </ContentContainer>
+
       </Container>
       <MessageModal setIsOpen={openSucessModal} isOpen={isSucessModal} text="ARTIGO CRIADO" />
     </Modal>

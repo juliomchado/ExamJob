@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 
 import Modal from 'react-modal';
 import { FiX } from 'react-icons/fi';
@@ -23,7 +23,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const MessageModal = ({ isOpen, setIsOpen, text }) => {
-  const [modalStatus, setModalStatus] = React.useState(isOpen);
+  const [modalStatus, setModalStatus] = useState(isOpen);
 
   useEffect(() => {
     setModalStatus(isOpen);

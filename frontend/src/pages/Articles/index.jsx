@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
 import {
   FiLogOut, FiPlusCircle, FiEdit2, FiDelete,
@@ -9,11 +10,12 @@ import {
 import Logo from '../../assets/Logo.svg';
 import Button from '../../components/Button';
 
-import Content from '../../assets/Conteudo1.png';
 import DetailModal from '../../components/modals/DetailModal';
 import SureModal from '../../components/modals/SureModal';
 import AddArticleModal from '../../components/modals/AddArticleModal';
 import EditArticleModal from '../../components/modals/EditArticleModal';
+
+import EditArticle from '../../store/modules/content/actions'
 
 import {
   Container, Main, CardContainer, Card, CardContent,
@@ -29,6 +31,7 @@ const Articles = () => {
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const openDetailModal = useCallback(() => {
     setIsOpenDetailModal(!isOpenDetailModal);
@@ -42,13 +45,14 @@ const Articles = () => {
     setIsOpenAddModal(!isOpenAddModal);
   }, [isOpenAddModal]);
 
-  const openEditModal = useCallback(() => {
+  const openEditModal = useCallback((content) => {
+    dispatch(EditArticle(content))
     setIsOpenEditModal(!isOpenEditModal);
-  }, [isOpenEditModal]);
+  }, [isOpenEditModal, dispatch]);
 
   const handleLogout = useCallback(() => {
     history.push('/login');
-  }, []);
+  }, [history]);
 
   useEffect(() => {
     api.get('articles').then((response) => {
@@ -86,7 +90,7 @@ const Articles = () => {
                 <p>{data.description}</p>
               </CardContent>
               <div>
-                <Button type="button" onClick={openEditModal}>
+                <Button type="button" onClick={() => openEditModal(data)}>
                   <FiEdit2 />
                   <span>Editar</span>
                 </Button>

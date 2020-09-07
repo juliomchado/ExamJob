@@ -15,14 +15,14 @@ const Login = () => {
   const handleSubmitButton = useCallback((e) => {
     e.preventDefault();
     history.push('/articles');
-  }, []);
+  }, [history]);
 
   return (
     <Container>
       <Form action="submit">
         <img src={Logo} alt="Lead Up" />
-        <Input type="text" label="E-mail" />
-        <Input type="password" label="Senha" />
+        <Input name="email" type="text" label="E-mail" />
+        <Input name="password" type="password" label="Senha" />
         <Button onClick={(e) => handleSubmitButton(e)}>Entrar</Button>
       </Form>
     </Container>
