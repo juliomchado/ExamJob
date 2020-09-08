@@ -1,27 +1,37 @@
-import React, { useCallback, useEffect, useState} from 'react';
+import React, {
+  useEffect,
+  useRef,
+
+} from 'react';
+
+import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
-const Input = ({ name ,type, label, value}, ...rest) => {
-  const [inputValue, setInputValue] = useState([])
+const Input = ({
+  name, label, containerStyle = {}, ...rest
+}) => {
+  const inputRef = useRef(null);
 
-  const handleState = useCallback((e) => {
-    setInputValue([...inputValue, e])
-  }, [])
+  const {
+    fieldName, defaultValue, error, registerField,
+  } = useField(name);
 
   useEffect(() => {
-    if(value){
-      handleState(value)
-    }
-  }, [])
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
 
   return (
-    <Container>
-    <label htmlFor="input">{label}</label>
-    <input name={name} type={type} placeholder={label} value={inputValue} onChange={(e) => handleState(e.target.value)} {...rest} />
-  </Container>
-
-)
-}
+    <Container style={containerStyle = {}}>
+      <label htmlFor="input">{label}</label>
+      <input defaultValue={defaultValue} ref={inputRef} {...rest} />
+      {error && <h1>Aconteceu um erro</h1>}
+    </Container>
+  );
+};
 
 export default Input;

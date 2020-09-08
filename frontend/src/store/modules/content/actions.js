@@ -1,8 +1,18 @@
-export default function EditArticle(content) {
-  return {
-    type: 'EDIT_ARTICLE',
-    payload: {
-      content
-    },
-  };
-}
+const LoadArticle = (articles) => ({
+  type: 'LOAD_ARTICLE',
+  payload: {
+    articles,
+  },
+});
+
+const UserLogin = (id) => ({
+  type: 'USER_LOGIN',
+  payload: {
+    id,
+  },
+});
+
+export {
+  LoadArticle,
+  UserLogin,
+};

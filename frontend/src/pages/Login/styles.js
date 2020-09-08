@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Form } from '@unform/web';
+
 export const Container = styled.div`
   display: flex;
   flex: 1;
@@ -10,7 +12,7 @@ export const Container = styled.div`
 
 `;
 
-export const Form = styled.form`
+export const NewForm = styled(Form)`
   width: 342px;
   height: 423px;
   box-shadow: 0px 3px 6px #00000029;

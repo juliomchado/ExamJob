@@ -1,27 +1,32 @@
+import produce from 'immer';
+
 const INITIAL_STATE = {
   items: [],
 };
 
-const content = (state = INITIAL_STATE, action) => {
+const content = (state = INITIAL_STATE, action) => produce(state, (draft) => {
   switch (action.type) {
-    case 'EDIT_ARTICLE': {
-      const { content } = action.payload;
+    case 'LOAD_ARTICLE': {
+      const { articles } = action.payload;
 
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            content
-          }
-        ]
-      }
+      draft.items.push({
+        articles,
+      });
+
+      break;
+    }
+    case 'USER_LOGIN': {
+      const { id } = action.payload;
+
+      draft.items.push({
+        id,
+      });
+      break;
     }
     default: {
-      return state;
+      return draft;
     }
   }
-
-}
+});
 
 export default content;

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   FiLogOut, FiPlusCircle, FiEdit2, FiDelete,
@@ -15,7 +15,7 @@ import SureModal from '../../components/modals/SureModal';
 import AddArticleModal from '../../components/modals/AddArticleModal';
 import EditArticleModal from '../../components/modals/EditArticleModal';
 
-import EditArticle from '../../store/modules/content/actions'
+import { LoadArticle } from '../../store/modules/content/actions';
 
 import {
   Container, Main, CardContainer, Card, CardContent,
@@ -24,6 +24,10 @@ import api from '../../services/api';
 
 const Articles = () => {
   const [content, setContent] = useState([]);
+
+  const reduxState = useSelector((state) => state.content);
+
+  console.log(`ReduxState:${reduxState}`);
 
   const [isOpenDetailModal, setIsOpenDetailModal] = useState(false);
   const [isOpenSureModal, setIsOpenSureModal] = useState(false);
@@ -45,19 +49,22 @@ const Articles = () => {
     setIsOpenAddModal(!isOpenAddModal);
   }, [isOpenAddModal]);
 
-  const openEditModal = useCallback((content) => {
-    dispatch(EditArticle(content))
+  const openEditModal = useCallback(() => {
     setIsOpenEditModal(!isOpenEditModal);
-  }, [isOpenEditModal, dispatch]);
+  }, [isOpenEditModal]);
 
   const handleLogout = useCallback(() => {
-    history.push('/login');
-  }, [history]);
+    history.push('/');
+  }, []);
 
   useEffect(() => {
-    api.get('articles').then((response) => {
+    const requestApi = async () => {
+      const response = await api.get('articles');
+      dispatch(LoadArticle(response.data));
       setContent(response.data);
-    });
+    };
+
+    requestApi();
   }, []);
 
   return (
@@ -66,7 +73,7 @@ const Articles = () => {
       <div>
         <img src={Logo} alt="Lead Up" />
 
-        <Button onClick={(e) => handleLogout(e)}>
+        <Button onClick={handleLogout}>
           <FiLogOut />
           <span>
             SAIR
@@ -90,7 +97,7 @@ const Articles = () => {
                 <p>{data.description}</p>
               </CardContent>
               <div>
-                <Button type="button" onClick={() => openEditModal(data)}>
+                <Button type="button" onClick={openEditModal}>
                   <FiEdit2 />
                   <span>Editar</span>
                 </Button>

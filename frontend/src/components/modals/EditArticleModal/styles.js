@@ -13,7 +13,7 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const ContentContainer = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 342px;
